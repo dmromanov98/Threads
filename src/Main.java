@@ -33,6 +33,9 @@ public class Main {
                     threads.get(i).start();
                 }
 
+//                for (Thread thread : threads)
+//                    thread.start();
+
                 for (Thread thread : threads)
                     try {
                         thread.join();
@@ -45,6 +48,7 @@ public class Main {
             else
                 System.out.println("Такой комманды не существует! ");
 
+            threads.clear();
         }
     }
 }
