@@ -33,8 +33,6 @@ public class Main {
                     threads.get(i).start();
                 }
 
-//                for (Thread thread : threads)
-//                    thread.start();
 
                 for (Thread thread : threads)
                     try {
