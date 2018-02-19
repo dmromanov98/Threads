@@ -3,18 +3,17 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Main {
 
     static List<Thread> threads = new ArrayList<>(); //потоки
-    static final int NUMBEROFTHREADS = 50; //количество потоков
+    static final int NUMBEROFTHREADS = 100; //количество потоков
 
     public static void main(String[] args) {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String task = null;
-
-        for (int i = 0; i < NUMBEROFTHREADS; i++)
-            threads.add(new Thread(new MyThread(String.valueOf(i)))); //добавление потоков в список
 
         while (true) {
             System.out.println("**********************" +
@@ -31,22 +30,24 @@ public class Main {
 
             if (task.equals("1")) {
 
-                for (Thread thread : threads)
-                    thread.start();
+                for (int i = 0; i < NUMBEROFTHREADS; i++) {
+                    threads.add(new Thread(new MyThread(String.valueOf(i)))); //добавление потоков в список
+                    threads.get(i).start(); // запуск потоков
+                }
 
-//                for (Thread thread : threads)
-//                    try {
-//                        thread.join(); // ожидание завершения потоков
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
+                for (Thread thread : threads)
+                    try {
+                        thread.join(); // ожидание завершения потоков
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
 
             } else if (task.equals("2"))
                 break;
             else
-                System.out.println("Такой комманды не существует! ");
+                System.out.println("Такой комманды не существует!");
 
-            threads.clear();
+            threads.clear(); //очищение списка потоков
         }
     }
 }
