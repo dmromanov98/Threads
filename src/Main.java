@@ -7,7 +7,7 @@ import java.util.List;
 public class Main {
 
     static List<Thread> threads = new ArrayList<>();
-
+    static final int NUMBEROFTHREADS = 5;
     public static void main(String[] args) {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String task = null;
@@ -27,7 +27,7 @@ public class Main {
 
             if (task.equals("1")) {
 
-                for (int i = 0; i < 5; i++) {
+                for (int i = 0; i < NUMBEROFTHREADS; i++) {
                     threads.add(new Thread(new MyThread(String.valueOf(i))));
                     threads.get(i).start();
                 }
