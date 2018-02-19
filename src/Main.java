@@ -8,6 +8,7 @@ public class Main {
 
     static List<Thread> threads = new ArrayList<>();
     static final int NUMBEROFTHREADS = 5;
+
     public static void main(String[] args) {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String task = null;
